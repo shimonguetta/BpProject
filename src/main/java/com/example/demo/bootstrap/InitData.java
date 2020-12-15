@@ -2,6 +2,7 @@ package com.example.demo.bootstrap;
 
 import com.example.demo.beans.Item;
 import com.example.demo.beans.ItemType;
+import com.example.demo.dto.ItemDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ElectricityService;
 import com.example.demo.service.SportsService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Component
 @Order(10)
@@ -23,88 +25,78 @@ public class InitData implements CommandLineRunner {
     private final AdminService adminService;
     @Override
     public void run(String... args) throws Exception {
-        electricityService.addItem( Item.builder()
-                .id(null)
+        electricityService.addItem( ItemDto.builder()
                 .itemType(ItemType.ELECTRICITY)
-                .name("TV")
+                .itemName("TV")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
 
-        electricityService.addItem( Item.builder()
-                .id(null)
+        electricityService.addItem( ItemDto.builder()
                 .itemType(ItemType.ELECTRICITY)
-                .name("Oven")
+                .itemName("Oven")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
 
-        electricityService.addItem( Item.builder()
-                .id(null)
+        electricityService.addItem( ItemDto.builder()
                 .itemType(ItemType.ELECTRICITY)
-                .name("Refrigerator")
+                .itemName("Refrigerator")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
 
-        electricityService.addItem( Item.builder()
-                .id(null)
+        electricityService.addItem( ItemDto.builder()
                 .itemType(ItemType.ELECTRICITY)
-                .name("Lamp")
+                .itemName("Lamp")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
-        sportsService.addItem( Item.builder()
-                .id(null)
+        sportsService.addItem( ItemDto.builder()
                 .itemType(ItemType.SPORTS)
-                .name("Ball")
+                .itemName("Ball")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
-        sportsService.addItem( Item.builder()
-                .id(null)
+        sportsService.addItem( ItemDto.builder()
                 .itemType(ItemType.SPORTS)
-                .name("Bicycle")
+                .itemName("Bicycle")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
-        sportsService.addItem( Item.builder()
-                .id(null)
+        sportsService.addItem( ItemDto.builder()
                 .itemType(ItemType.SPORTS)
-                .name("Shoes")
+                .itemName("Shoes")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
-        sportsService.addItem( Item.builder()
-                .id(null)
+        sportsService.addItem( ItemDto.builder()
                 .itemType(ItemType.SPORTS)
-                .name("Weights")
+                .itemName("Weights")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
-        adminService.addItem( Item.builder()
-                .id(null)
+        adminService.addItem( ItemDto.builder()
                 .itemType(ItemType.SPORTS)
-                .name("Treadmill")
+                .itemName("Treadmill")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
-        adminService.addItem( Item.builder()
-                .id(null)
+        adminService.addItem( ItemDto.builder()
                 .itemType(ItemType.ELECTRICITY)
-                .name("IPhone")
+                .itemName("IPhone")
                 .price(BigDecimal.valueOf(100.1))
-                .createdDate(Timestamp.valueOf(LocalDateTime.now()))
-                .lastModifiedDate(Timestamp.valueOf(LocalDateTime.now()))
+                .createdDate(OffsetDateTime.now())
+                .lastModifiedDate(OffsetDateTime.now())
                 .build());
     }
 }

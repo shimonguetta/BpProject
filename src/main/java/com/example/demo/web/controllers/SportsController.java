@@ -1,6 +1,7 @@
 package com.example.demo.web.controllers;
 
 import com.example.demo.beans.Item;
+import com.example.demo.dto.ItemDto;
 import com.example.demo.exception.InvalidEntityException;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.SportsService;
@@ -15,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class SportsController {
     private final SportsService sportsService;
     @PostMapping
-    public ResponseEntity<?> addItem(@RequestBody Item item){
+    public ResponseEntity<?> addItem(@RequestBody ItemDto itemDto){
         try {
-            sportsService.addItem(item);
+            sportsService.addItem(itemDto);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (InvalidEntityException e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -25,18 +26,18 @@ public class SportsController {
 
     }
     @PutMapping
-    public ResponseEntity<?> updateItem(@RequestBody Item item){
+    public ResponseEntity<?> updateItem(@RequestBody ItemDto itemDto){
         try {
-            sportsService.updateItem(item);
+            sportsService.updateItem(itemDto);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }catch (InvalidEntityException e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
     @DeleteMapping
-    public ResponseEntity<?> deleteItem(@RequestBody Item item){
+    public ResponseEntity<?> deleteItem(@RequestBody ItemDto itemDto){
         try {
-            sportsService.deleteItem(item);
+            sportsService.deleteItem(itemDto);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (InvalidEntityException e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
