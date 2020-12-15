@@ -11,7 +11,7 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(uses = {DateMapper.class}, componentModel = "spring")
-//@DecoratedWith(ItemDecorator.class)
+@DecoratedWith(ItemDecorator.class)
 public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
