@@ -30,6 +30,7 @@ public abstract  class ItemDecorator implements  ItemMapper{
         itemDto.setItemType(item.getItemType());
         itemDto.setPrice(item.getPrice());
         itemDto.setItemName(item.getName());
+
         return itemDto;
     }
 
