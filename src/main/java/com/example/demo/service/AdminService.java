@@ -9,6 +9,9 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,16 +27,21 @@ public class AdminService extends  BasicUserDtoService implements UserService{
     @Override
     public void addItem(ItemDto itemDto) {
         Item item = itemMapper.itemDtoToItem(itemDto);
+        item.setCreatedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
+        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
         itemRepository.save(item);
     }
 
     @Override
     public void updateItem(ItemDto itemDto) throws InvalidEntityException {
-        if(itemRepository.findById(itemDto.getId()).isEmpty()){
+        Optional<Item> savedItem = itemRepository.findById(itemDto.getId());
+        if(savedItem.isEmpty()){
             throw new InvalidEntityException("Cannot update not existing id");
         }
         Item item = itemMapper.itemDtoToItem(itemDto);
-        itemRepository.save(item);
+        item.setCreatedDate(savedItem.get().getCreatedDate());
+        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
+        itemRepository.saveAndFlush(item);
 
     }
 

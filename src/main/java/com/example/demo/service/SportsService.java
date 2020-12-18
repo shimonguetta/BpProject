@@ -4,12 +4,16 @@ import com.example.demo.beans.Item;
 import com.example.demo.beans.ItemType;
 import com.example.demo.dto.ItemDto;
 import com.example.demo.exception.InvalidEntityException;
+import com.example.demo.exception.InvalidOperationException;
 import com.example.demo.mapper.ItemMapper;
 import com.example.demo.repository.ItemRepository;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,31 +26,36 @@ public class SportsService extends  BasicUserDtoService  implements UserService{
     }
 
     @Override
-    public void addItem(ItemDto itemDto) throws InvalidEntityException {
+    public void addItem(ItemDto itemDto) throws InvalidEntityException , InvalidOperationException {
         if (itemDto.getItemType() != ItemType.SPORTS){
-            throw new InvalidEntityException("cannot add an item outside your domain");
+            throw new InvalidOperationException("cannot add an item outside your domain");
         }
         Item item = itemMapper.itemDtoToItem(itemDto);
+        item.setCreatedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
+        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
         itemRepository.save(item);
     }
 
     @Override
-    public void updateItem(ItemDto itemDto) throws InvalidEntityException {
+    public void updateItem(ItemDto itemDto) throws InvalidEntityException ,InvalidOperationException{
         if (itemDto.getItemType() != ItemType.SPORTS){
-            throw new InvalidEntityException("cannot update an item outside your domain");
+            throw new InvalidOperationException("cannot update an item outside your domain");
         }
-        if(itemRepository.findById(itemDto.getId()).isEmpty()){
+        Optional<Item> savedItem = itemRepository.findById(itemDto.getId());
+        if(savedItem.isEmpty()){
             throw new InvalidEntityException("Cannot update not existing id");
         }
         Item item = itemMapper.itemDtoToItem(itemDto);
-        itemRepository.save(item);
+        item.setCreatedDate(savedItem.get().getCreatedDate());
+        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
+        itemRepository.saveAndFlush(item);
 
     }
 
     @Override
-    public void deleteItem(ItemDto itemDto) throws InvalidEntityException {
+    public void deleteItem(ItemDto itemDto) throws InvalidEntityException ,InvalidOperationException{
         if (itemDto.getItemType() != ItemType.SPORTS){
-            throw new InvalidEntityException("cannot delete an item outside your domain");
+            throw new InvalidOperationException("cannot delete an item outside your domain");
         }
         Item item = itemMapper.itemDtoToItem(itemDto);
         itemRepository.delete(item);
