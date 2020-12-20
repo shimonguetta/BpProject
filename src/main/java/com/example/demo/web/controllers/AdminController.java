@@ -21,7 +21,6 @@ public class AdminController {
     @PostMapping("items")
     @ResponseStatus(HttpStatus.CREATED)
     public void addItem(@RequestBody ItemDto itemDto){
-        System.out.println("admin controller");
             adminService.addItem(itemDto);
     }
     @SneakyThrows

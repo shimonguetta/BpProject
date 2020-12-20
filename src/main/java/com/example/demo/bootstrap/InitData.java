@@ -6,6 +6,7 @@ import com.example.demo.dto.ItemDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.ElectricityService;
 import com.example.demo.service.SportsService;
+import com.example.demo.utils.AppArtUtils;
 import com.example.demo.utils.TablePrinter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @Component
-@Order(10)
+@Order(5)
 @RequiredArgsConstructor
 public class InitData implements CommandLineRunner {
     private final SportsService sportsService;
@@ -26,6 +27,8 @@ public class InitData implements CommandLineRunner {
     private final AdminService adminService;
     @Override
     public void run(String... args) throws Exception {
+        System.out.println(AppArtUtils.BOOTSTRAP);
+
         electricityService.addItem( ItemDto.builder()
                 .itemType(ItemType.ELECTRICITY)
                 .itemName("TV")
