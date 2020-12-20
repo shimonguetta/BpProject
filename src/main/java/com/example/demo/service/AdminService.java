@@ -27,8 +27,6 @@ public class AdminService extends  BasicUserDtoService implements UserService{
     @Override
     public void addItem(ItemDto itemDto) {
         Item item = itemMapper.itemDtoToItem(itemDto);
-        item.setCreatedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
-        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
         itemRepository.save(item);
     }
 
@@ -39,8 +37,6 @@ public class AdminService extends  BasicUserDtoService implements UserService{
             throw new InvalidEntityException("Cannot update not existing id");
         }
         Item item = itemMapper.itemDtoToItem(itemDto);
-        item.setCreatedDate(savedItem.get().getCreatedDate());
-        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
         itemRepository.saveAndFlush(item);
 
     }

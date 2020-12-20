@@ -16,11 +16,11 @@ public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
    @Mappings({@Mapping(source = "name",target = "itemName"),
-              @Mapping(source = "id",target = "Id"),})
+           @Mapping(source = "id",target = "id"),})
     ItemDto itemToDtoItem(Item item);
 
    @Mappings({@Mapping(source = "itemName",target = "name"),
-              @Mapping(source = "id",target = "id"),})
+           @Mapping(source = "id",target = "id"),})
     Item itemDtoToItem(ItemDto itemDto);
     List<ItemDto> itemsToDtos(List<Item> items);
     List<Item> DtosToItems(List<ItemDto> itemDtos);

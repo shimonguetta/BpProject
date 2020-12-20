@@ -10,7 +10,7 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 		ApplicationContext ctx = SpringApplication.run(DemoApplication.class, args);
-		System.out.println("IoC Container was loaded");
+		System.out.println("IoC Container was loaded v0.1");
 	}
 
 }
