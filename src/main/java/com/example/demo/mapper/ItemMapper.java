@@ -11,14 +11,16 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(uses = {DateMapper.class}, componentModel = "spring")
-//@DecoratedWith(ItemDecorator.class)
+@DecoratedWith(ItemDecorator.class)
 public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
 
-   @Mappings({@Mapping(source = "name",target = "itemName"),})
+   @Mappings({@Mapping(source = "name",target = "itemName"),
+           @Mapping(source = "id",target = "id"),})
     ItemDto itemToDtoItem(Item item);
 
-   @Mappings({@Mapping(source = "itemName",target = "name")})
+   @Mappings({@Mapping(source = "itemName",target = "name"),
+           @Mapping(source = "id",target = "id"),})
     Item itemDtoToItem(ItemDto itemDto);
     List<ItemDto> itemsToDtos(List<Item> items);
     List<Item> DtosToItems(List<ItemDto> itemDtos);

@@ -33,7 +33,7 @@ public class Item {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
-    //@NotBlank
+    @NotBlank
     private String name;
 
     @Enumerated(EnumType.STRING)

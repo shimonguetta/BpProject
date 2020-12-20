@@ -25,11 +25,11 @@ public abstract  class ItemDecorator implements  ItemMapper{
     public ItemDto itemToDtoItem(Item item) {
         ItemDto itemDto = mapper.itemToDtoItem(item);
         itemDto.setId(item.getId());
-        itemDto.setCreatedDate(dateMapper.asOffsetDateTime(item.getCreatedDate()));
-        itemDto.setLastModifiedDate(dateMapper.asOffsetDateTime(item.getLastModifiedDate()));
+//        itemDto.setCreatedDate(dateMapper.asOffsetDateTime(item.getCreatedDate()));
+//        itemDto.setLastModifiedDate(dateMapper.asOffsetDateTime(item.getLastModifiedDate()));
         itemDto.setItemType(item.getItemType());
         itemDto.setPrice(item.getPrice());
-        itemDto.setItemName(item.getName());
+//        itemDto.setItemName(item.getName());
         return itemDto;
     }
     @Override
@@ -41,7 +41,7 @@ public abstract  class ItemDecorator implements  ItemMapper{
         //item.setLastModifiedDate(dateMapper.asTimestamp(itemDto.getLastModifiedDate()));
         item.setItemType(itemDto.getItemType());
         item.setPrice(itemDto.getPrice());
-        item.setName(itemDto.getItemName());
+//        item.setName(itemDto.getItemName());
         return item;
     }
 

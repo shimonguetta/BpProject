@@ -6,36 +6,40 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class ItemDto {
-    @Null
-    private Long Id;
+public class ItemDto implements Serializable {
 
     @Null
-    @JsonFormat(pattern = "yyy-MM-dd HH:mm:ss")
+    private Long id;
+
+    @Null
+    //@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime createdDate;
 
     @Null
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    //@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime lastModifiedDate;
 
+    @NotBlank
+    private String itemName; //==> Different name than hibernate entity
+
     @NotNull
+
     private ItemType itemType;
 
-    @NotBlank
-    private String itemName;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Positive
