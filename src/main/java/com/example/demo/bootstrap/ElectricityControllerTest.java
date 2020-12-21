@@ -23,6 +23,7 @@ public class ElectricityControllerTest implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        ItemDto itemDto;
         System.out.println(AppArtUtils.ELECTRICITY);
 
         try  {
@@ -34,6 +35,23 @@ public class ElectricityControllerTest implements CommandLineRunner {
         TablePrinter.print(adminService.getAllItem());
         try  {
             restTemplate.postForObject("HTTP://localhost:8080/electricity/items", itemDtoGenerator(ItemType.ELECTRICITY), String.class);
+        }catch ( HttpClientErrorException e){
+            System.out.println(e.getResponseBodyAsString());
+            System.out.println(e.getStatusCode());
+        }
+        TablePrinter.print(adminService.getAllItem());
+        try  {
+            itemDto = restTemplate.getForObject("HTTP://localhost:8080/electricity/5",ItemDto.class);
+            itemDto.setPrice(BigDecimal.valueOf(150));
+            restTemplate.put("HTTP://localhost:8080/electricity/items",itemDto);
+        }catch ( HttpClientErrorException e){
+            System.out.println(e.getResponseBodyAsString());
+            System.out.println(e.getStatusCode());
+        }
+        try  {
+            itemDto = restTemplate.getForObject("HTTP://localhost:8080/electricity/4",ItemDto.class);
+            itemDto.setPrice(BigDecimal.valueOf(150));
+            restTemplate.put("HTTP://localhost:8080/electricity/items",itemDto);
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());

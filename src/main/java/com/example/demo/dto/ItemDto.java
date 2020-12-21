@@ -24,13 +24,13 @@ public class ItemDto implements Serializable {
     private Long id;
 
     @Null
-    //@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime createdDate;
 
     @Null
-    //@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
+    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime lastModifiedDate;
 
     @NotBlank
