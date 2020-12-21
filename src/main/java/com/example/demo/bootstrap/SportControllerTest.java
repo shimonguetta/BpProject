@@ -26,7 +26,6 @@ public class SportControllerTest implements CommandLineRunner {
 
     @Override
     public void run(String... args)  {
-        String res = null;
         ItemDto itemDto;
         System.out.println(AppArtUtils.SPORT);
 
@@ -40,6 +39,24 @@ public class SportControllerTest implements CommandLineRunner {
         TablePrinter.print(adminService.getAllItem());
         try  {
         restTemplate.postForObject("HTTP://localhost:8080/sport/items", itemDtoGenerator(ItemType.ELECTRICITY), String.class);
+        }catch ( HttpClientErrorException e){
+            System.out.println(e.getResponseBodyAsString());
+            System.out.println(e.getStatusCode());
+        }
+        TablePrinter.print(adminService.getAllItem());
+
+        try  {
+            itemDto = restTemplate.getForObject("HTTP://localhost:8080/sport/5",ItemDto.class);
+            itemDto.setPrice(BigDecimal.valueOf(150));
+            restTemplate.put("HTTP://localhost:8080/sport/items",itemDto);
+        }catch ( HttpClientErrorException e){
+            System.out.println(e.getResponseBodyAsString());
+            System.out.println(e.getStatusCode());
+        }
+        try  {
+            itemDto = restTemplate.getForObject("HTTP://localhost:8080/sport/4",ItemDto.class);
+            itemDto.setPrice(BigDecimal.valueOf(150));
+            restTemplate.put("HTTP://localhost:8080/sport/items",itemDto);
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
