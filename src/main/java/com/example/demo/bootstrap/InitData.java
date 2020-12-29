@@ -1,6 +1,5 @@
 package com.example.demo.bootstrap;
 
-import com.example.demo.beans.Item;
 import com.example.demo.beans.ItemType;
 import com.example.demo.dto.ItemDto;
 import com.example.demo.service.AdminService;
@@ -14,9 +13,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 
 @Component
 @Order(5)

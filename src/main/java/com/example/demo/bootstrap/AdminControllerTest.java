@@ -10,7 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -38,7 +37,7 @@ public class AdminControllerTest implements CommandLineRunner {
         headers.add("Authorization", "Basic " + base64Cards);
 
         restTemplate.postForObject("HTTP://localhost:8080/admin/items",
-                new HttpEntity<ItemDto>(testItem,headers),
+                new HttpEntity<>(testItem,headers),
                 String.class);
 
         TablePrinter.print(adminService.getAllItem());

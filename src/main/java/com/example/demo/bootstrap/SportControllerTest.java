@@ -5,7 +5,6 @@ import com.example.demo.dto.ItemDto;
 import com.example.demo.service.AdminService;
 import com.example.demo.utils.AppArtUtils;
 import com.example.demo.utils.TablePrinter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +12,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -27,7 +25,6 @@ import java.util.Base64;
 public class SportControllerTest implements CommandLineRunner {
     private final RestTemplate restTemplate;
     private final AdminService adminService;
-    private final ObjectMapper objectMapper;
 
     @Override
     public void run(String... args)  {
@@ -41,7 +38,7 @@ public class SportControllerTest implements CommandLineRunner {
 
         try  {
              restTemplate.postForObject("HTTP://localhost:8080/sport/items",
-                     new HttpEntity<ItemDto>(itemDtoGenerator(ItemType.SPORTS),headers), String.class);
+                     new HttpEntity<>(itemDtoGenerator(ItemType.SPORTS),headers), String.class);
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
@@ -49,7 +46,7 @@ public class SportControllerTest implements CommandLineRunner {
         TablePrinter.print(adminService.getAllItem());
         try  {
         restTemplate.postForObject("HTTP://localhost:8080/sport/items",
-                new HttpEntity<ItemDto>(itemDtoGenerator(ItemType.ELECTRICITY),headers), String.class);
+                new HttpEntity<>(itemDtoGenerator(ItemType.ELECTRICITY),headers), String.class);
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
@@ -62,7 +59,7 @@ public class SportControllerTest implements CommandLineRunner {
 
             itemDto.setPrice(BigDecimal.valueOf(150));
             restTemplate.put("HTTP://localhost:8080/sport/items"
-                    ,new HttpEntity<ItemDto>(itemDto,headers));
+                    ,new HttpEntity<>(itemDto,headers));
 
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
@@ -74,7 +71,7 @@ public class SportControllerTest implements CommandLineRunner {
 
             itemDto.setPrice(BigDecimal.valueOf(150));
             restTemplate.put("HTTP://localhost:8080/sport/items"
-                    ,new HttpEntity<ItemDto>(itemDto,headers));
+                    ,new HttpEntity<>(itemDto,headers));
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());

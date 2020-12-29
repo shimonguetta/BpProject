@@ -37,7 +37,7 @@ public class ElectricityControllerTest implements CommandLineRunner {
 
         try  {
             restTemplate.postForObject("HTTP://localhost:8080/electricity/items"
-                    ,new HttpEntity<ItemDto>(itemDtoGenerator(ItemType.SPORTS),headers), String.class);
+                    ,new HttpEntity<>(itemDtoGenerator(ItemType.SPORTS),headers), String.class);
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
@@ -45,7 +45,7 @@ public class ElectricityControllerTest implements CommandLineRunner {
         TablePrinter.print(adminService.getAllItem());
         try  {
             restTemplate.postForObject("HTTP://localhost:8080/electricity/items"
-                    ,new HttpEntity<ItemDto>(itemDtoGenerator(ItemType.ELECTRICITY),headers), String.class);
+                    ,new HttpEntity<>(itemDtoGenerator(ItemType.ELECTRICITY),headers), String.class);
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
@@ -56,7 +56,7 @@ public class ElectricityControllerTest implements CommandLineRunner {
                 new HttpEntity<String>(headers),ItemDto.class).getBody();
             itemDto.setPrice(BigDecimal.valueOf(150));
             restTemplate.put("HTTP://localhost:8080/electricity/items"
-                    ,new HttpEntity<ItemDto>(itemDto,headers));
+                    ,new HttpEntity<>(itemDto,headers));
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
