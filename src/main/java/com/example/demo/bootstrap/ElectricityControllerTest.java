@@ -66,7 +66,7 @@ public class ElectricityControllerTest implements CommandLineRunner {
                     new HttpEntity<String>(headers),ItemDto.class).getBody();
             itemDto.setPrice(BigDecimal.valueOf(150));
             restTemplate.put("HTTP://localhost:8080/electricity/items"
-                    ,new HttpEntity<ItemDto>(itemDto,headers));
+                    ,new HttpEntity<>(itemDto,headers));
         }catch ( HttpClientErrorException e){
             System.out.println(e.getResponseBodyAsString());
             System.out.println(e.getStatusCode());
