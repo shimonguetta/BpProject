@@ -20,15 +20,15 @@ import java.time.OffsetDateTime;
 @Builder
 public class ItemDto implements Serializable {
 
-    @Null
+ //   @Null
     private Long id;
 
-    @Null
+   // @Null
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
     //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime createdDate;
 
-    @Null
+  //  @Null
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
     //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private OffsetDateTime lastModifiedDate;
