@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item,Long> {
-    public List<Item> findByItemType(ItemType itemType);
-    public Optional<Item> findByIdAndItemType(Long id , ItemType itemType);
+    List<Item> findByItemType(ItemType itemType);
+    Optional<Item> findByIdAndItemType(Long id , ItemType itemType);
     @Query(value = "SELECT COUNT(*) FROM items where item_type = :item_type",nativeQuery = true)
     Long countItemsByType(@Param("item_type") String item_type);
 

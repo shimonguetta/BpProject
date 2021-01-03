@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-@Order(5)
+@Order(1)
 @RequiredArgsConstructor
 public class InitData implements CommandLineRunner {
     private final SportsService sportsService;

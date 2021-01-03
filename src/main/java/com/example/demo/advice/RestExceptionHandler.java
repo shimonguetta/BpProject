@@ -12,13 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestExceptionHandler {
 
-    @ExceptionHandler(value= {InvalidOperationException.class})
+    @ExceptionHandler(value= {InvalidOperationException.class,InvalidEntityException.class})
     public ResponseEntity<?> handleInvalidOperationException(Exception ex){
-        return ResponseEntity.badRequest()
-                .body(new ErrorDto("Exception",ex.getMessage(), HttpStatus.BAD_REQUEST.value()));
-    }
-    @ExceptionHandler(value = {InvalidEntityException.class})
-    public ResponseEntity handleInvalidEntityException(Exception ex){
         return ResponseEntity.badRequest()
                 .body(new ErrorDto("Exception",ex.getMessage(), HttpStatus.BAD_REQUEST.value()));
     }

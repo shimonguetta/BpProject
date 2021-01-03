@@ -9,11 +9,10 @@ import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 
-public class AdminService extends  BasicUserDtoService implements UserService{
+public class AdminService extends  BasicItemDtoService implements BasicItemService {
 
     @Builder
     public AdminService(ItemRepository itemRepository, ItemMapper itemMapper) {
@@ -28,10 +27,8 @@ public class AdminService extends  BasicUserDtoService implements UserService{
 
     @Override
     public void updateItem(ItemDto itemDto) throws InvalidEntityException {
-        Optional<Item> savedItem = itemRepository.findById(itemDto.getId());
-        if(savedItem.isEmpty()){
-            throw new InvalidEntityException("Cannot update not existing id");
-        }
+        Item savedItem = itemRepository.findById(itemDto.getId())
+                .orElseThrow(()-> new InvalidEntityException("Cannot update not existing id"));
         Item item = itemMapper.itemDtoToItem(itemDto);
         itemRepository.saveAndFlush(item);
 
@@ -46,11 +43,9 @@ public class AdminService extends  BasicUserDtoService implements UserService{
 
     @Override
     public ItemDto  getItem(Long id) throws InvalidEntityException {
-        Optional<Item> item = itemRepository.findById(id);
-        if(item.isEmpty()){
-            throw new InvalidEntityException("Item not found");
-        }
-        return itemMapper.itemToDtoItem(item.get());
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new InvalidEntityException("Item not found"));
+        return itemMapper.itemToDtoItem(item);
 
     }
 
