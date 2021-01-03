@@ -8,18 +8,13 @@ import com.example.demo.exception.InvalidOperationException;
 import com.example.demo.mapper.ItemMapper;
 import com.example.demo.repository.ItemRepository;
 import lombok.Builder;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 
-public class ElectricityService extends  BasicUserDtoService  implements UserService {
+public class ElectricityService extends  BasicItemDtoService  implements BasicItemService {
     @Builder
     public ElectricityService(ItemRepository itemRepository, ItemMapper itemMapper) {
         super(itemRepository, itemMapper);
@@ -31,8 +26,6 @@ public class ElectricityService extends  BasicUserDtoService  implements UserSer
             throw new InvalidEntityException("cannot add an item outside your domain");
         }
         Item item = itemMapper.itemDtoToItem(itemDto);
-        item.setCreatedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
-        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
         itemRepository.save(item);
     }
 
@@ -41,13 +34,9 @@ public class ElectricityService extends  BasicUserDtoService  implements UserSer
         if (itemDto.getItemType() != ItemType.ELECTRICITY){
             throw new InvalidOperationException("cannot update an item outside your domain");
         }
-        Optional<Item> savedItem = itemRepository.findById(itemDto.getId());
-        if(savedItem.isEmpty()){
-            throw new InvalidEntityException("Cannot update not existing id");
-        }
+        Item savedItem = itemRepository.findById(itemDto.getId())
+                    .orElseThrow(()->new InvalidEntityException("Cannot update not existing id"));
         Item item = itemMapper.itemDtoToItem(itemDto);
-        item.setCreatedDate(savedItem.get().getCreatedDate());
-        item.setLastModifiedDate(Timestamp.valueOf(LocalDateTime.now(ZoneId.of("Asia/Jerusalem"))));
         itemRepository.saveAndFlush(item);
 
     }
@@ -63,11 +52,9 @@ public class ElectricityService extends  BasicUserDtoService  implements UserSer
 
     @Override
     public ItemDto getItem(Long id) throws InvalidEntityException {
-        Optional<Item> item = itemRepository.findByIdAndItemType(id, ItemType.ELECTRICITY);
-        if(item.isEmpty()){
-            throw new InvalidEntityException("Item not found");
-        }
-        return itemMapper.itemToDtoItem(item.get());
+        Item item = itemRepository.findByIdAndItemType(id, ItemType.ELECTRICITY)
+                .orElseThrow(() -> new InvalidEntityException("Item not found"));
+        return itemMapper.itemToDtoItem(item);
     }
 
     @Override

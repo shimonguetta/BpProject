@@ -8,10 +8,13 @@ import com.example.demo.utils.TablePrinter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.util.Base64;
 
 @Component
 @Order(10)
@@ -28,7 +31,15 @@ public class AdminControllerTest implements CommandLineRunner {
                 .itemName("item1")
                 .price(BigDecimal.valueOf(102.2)).build();
 
-        restTemplate.postForObject("HTTP://localhost:8080/admin/items",testItem,String.class);
+        String adminAuth = "admin:1234";
+        String base64Cards = Base64.getEncoder().encodeToString(adminAuth.getBytes());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Basic " + base64Cards);
+
+        restTemplate.postForObject("HTTP://localhost:8080/admin/items",
+                new HttpEntity<>(testItem,headers),
+                String.class);
+
         TablePrinter.print(adminService.getAllItem());
 
 
